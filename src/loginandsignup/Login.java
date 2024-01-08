@@ -216,24 +216,33 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
-        try{
-            String sql = "SELECT * FROM akun WHERE username=('"+txtusername.getText()+"')AND password=('"+ txtpassword.getText()+"')";
-            java.sql.Connection conn=(Connection)Config.configDB();
-            java.sql.PreparedStatement pst=conn.prepareStatement(sql);
-            java.sql.ResultSet rs=pst.executeQuery(sql);
-            if (rs.next()) {
-                if(txtusername.getText().equals(rs.getString("username"))&&txtpassword.getText().equals(rs.getString("password"))) {
-                    JOptionPane.showMessageDialog(null, "berhasil login");
-                    this.setVisible(false);
-                    new HalamanProfil().setVisible(true);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "username atau password salah");
+         try {
+        String sql = "SELECT * FROM akun WHERE username=('" + txtusername.getText() + "') AND password=('" + txtpassword.getText() + "')";
+        java.sql.Connection conn = (Connection) Config.configDB();
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        java.sql.ResultSet rs = pst.executeQuery(sql);
+
+        if (rs.next()) {
+            if (txtusername.getText().equals(rs.getString("username")) && txtpassword.getText().equals(rs.getString("password"))) {
+                // Retrieve user data
+                String nama = rs.getString("name");
+                String username = rs.getString("username");
+                String noTelepon = rs.getString("no");
+                String password = rs.getString("password");
+
+                // Open HalamanProfil and pass user data
+                HalamanProfil halamanProfil = new HalamanProfil(nama, username, noTelepon);
+                halamanProfil.setVisible(true);
+
+                // Close the current login frame
+                this.dispose();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Username atau password salah");
         }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
     }//GEN-LAST:event_btnloginActionPerformed
 
     private void btnregistrasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrasiActionPerformed
