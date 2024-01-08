@@ -4,19 +4,96 @@
  */
 package PasTrash;
 import javax.swing.JFrame;
+import java.sql.Connection; 
+import loginandsignup.Config;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author Dell
  */
 public class HalamanProfil extends JFrame {
+     public HalamanProfil() {
+        initComponents();
+    }
 
     /**
      * Creates new form HalamanProfil
      */
-    public HalamanProfil() {
+     public HalamanProfil(String name, String username, String no) {
         initComponents();
+        jTextField1.setText(name);
+        jTextField2.setText(username);
+        jTextField3.setText(no);
+   
+        // Store user data for updating
+        this.name = name;
+        this.username = username;
+        this.no = no;
+        this.password = password;
     }
+     
+     // Store user data for updating
+    private String name;
+    private String username;
+    private String no;
+    private String password;
+    
+   private void updateAndSaveData(String nama, String username, String noTelp, String password) {
+    try {
+        Connection conn = Config.configDB();
+        String query;
+
+        // Jika kata sandi tidak diubah (jTextField4 kosong), gunakan kata sandi yang lama
+        if (password.isEmpty()) {
+            query = "UPDATE akun SET username=?, name=?, no=? WHERE username=?";
+        } else {
+            query = "UPDATE akun SET username=?, password=?, name=?, no=? WHERE username=?";
+        }
+
+        // Check jika ada perubahan pada data
+        if (!this.name.equals(nama) || !this.username.equals(username) || !this.no.equals(noTelp) || !this.password.equals(password)) {
+            try (PreparedStatement preparedStmt = conn.prepareStatement(query)) {
+                int parameterIndex = 1;
+
+                preparedStmt.setString(parameterIndex++, username);
+
+                if (!password.isEmpty()) {
+                    preparedStmt.setString(parameterIndex++, password);
+                }
+
+                preparedStmt.setString(parameterIndex++, nama);
+                preparedStmt.setString(parameterIndex++, noTelp);
+                preparedStmt.setString(parameterIndex++, this.username);
+
+                int affectedRows = preparedStmt.executeUpdate();
+                if (affectedRows > 0) {
+                    JOptionPane.showMessageDialog(null, "Data updated successfully!");
+
+                    // Update data yang disimpan di objek
+                    this.name = nama;
+                    this.username = username;
+                    this.no = noTelp;
+                    this.password = password.isEmpty() ? this.password : password;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Failed to update data.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No changes made.");
+        }
+
+        conn.close();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+    }
+}
+
+     
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -271,9 +348,13 @@ public class HalamanProfil extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimpanActionPerformed
-        // TODO add your handling code here
-        EditProfil editProfil = new EditProfil();
-        editProfil.setVisible(true);
+        String name = jTextField1.getText();
+    String username = jTextField2.getText();
+    String no = jTextField3.getText();
+    String password = jTextField4.getText();
+
+    // Call the method with the retrieved values
+    updateAndSaveData(name, username, no, password);
     }//GEN-LAST:event_buttonSimpanActionPerformed
 
     /**
