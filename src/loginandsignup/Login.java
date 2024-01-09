@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import pass.lupapas;
+import main.Menu;
 
 
 public class Login extends javax.swing.JFrame {
@@ -212,7 +214,12 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+        // Buka halaman "lupapas" (lupa password)
+    lupapas halamanLupaPassword = new lupapas();
+    halamanLupaPassword.setVisible(true);
+
+    // Tutup frame login yang sekarang
+    this.dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
@@ -224,15 +231,9 @@ public class Login extends javax.swing.JFrame {
 
         if (rs.next()) {
             if (txtusername.getText().equals(rs.getString("username")) && txtpassword.getText().equals(rs.getString("password"))) {
-                // Retrieve user data
-                String nama = rs.getString("name");
-                String username = rs.getString("username");
-                String noTelepon = rs.getString("no");
-                String password = rs.getString("password");
-
-                // Open HalamanProfil and pass user data
-                HalamanProfil halamanProfil = new HalamanProfil(nama, username, noTelepon);
-                halamanProfil.setVisible(true);
+                // Open Menu frame
+                Menu menu = new Menu();
+                menu.setVisible(true);
 
                 // Close the current login frame
                 this.dispose();
