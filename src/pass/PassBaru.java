@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package pass;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,10 +15,19 @@ package pass;
  */
 public class PassBaru extends javax.swing.JFrame {
 
+    private final String noTelepon;
+
+    private Connection getDatabaseConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/userdb";
+        String username = "root";
+        String password = "";
+        return DriverManager.getConnection(url, username, password);
+    }
     /**
      * Creates new form PassBaru
      */
-    public PassBaru() {
+     public PassBaru(String noTelepon) {
+        this.noTelepon = noTelepon;
         initComponents();
     }
 
@@ -159,22 +173,42 @@ public class PassBaru extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+  String passwordBaru = jTextField1.getText();
+        String konfirmasiPassword = jTextField2.getText();
+
+        if (passwordBaru.equals(konfirmasiPassword)) {
+            if (simpanPasswordKeDatabase(passwordBaru)) {
+                JOptionPane.showMessageDialog(this, "Password berhasil diubah!");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menyimpan password ke database.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Password tidak sesuai!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
-
+ private boolean simpanPasswordKeDatabase(String password) {
+        try (Connection connection = getDatabaseConnection()) {
+            String query = "UPDATE akun SET password=? WHERE no=?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, password);
+                preparedStatement.setString(2, noTelepon);
+                int affectedRows = preparedStatement.executeUpdate();
+                return affectedRows > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -182,21 +216,13 @@ public class PassBaru extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PassBaru.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PassBaru.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PassBaru.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PassBaru.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PassBaru().setVisible(true);
+                new PassBaru("081234567890").setVisible(true);
             }
         });
     }

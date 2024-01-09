@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+import PasTrash.HalamanProfil;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 /**
  *
@@ -15,6 +19,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        setEventListeners();
     }
 
     /**
@@ -112,7 +117,7 @@ public class Menu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,6 +206,25 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void setEventListeners() {
+        // Add a mouse listener to jLabel7
+        jLabel7.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                jLabel7MouseClicked(e);
+            }
+        });
+    }
+    
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
+    // Code to execute when jLabel7 is clicked
+    
+    HalamanProfil halamanProfil = new HalamanProfil();
+    halamanProfil.setVisible(true);
+    this.dispose();  // Assuming you want to close the current menu after navigating to HalamanProfil
+}  
+    
     /**
      * @param args the command line arguments
      */
