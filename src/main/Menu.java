@@ -47,7 +47,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablesampah = new javax.swing.JTable();
         btncetak = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -142,9 +142,9 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(101, 101, 101))
         );
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablesampah.setAutoCreateRowSorter(true);
+        tablesampah.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        tablesampah.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Alat Pertukaran Suhu", "Air Conditioner (AC)"},
                 {"Layar Monitor", "Televisi"},
@@ -158,9 +158,16 @@ public class Menu extends javax.swing.JFrame {
                 "Kategori Sampah", "Jenis Sampah"
             }
         ));
-        jTable2.setColumnSelectionAllowed(true);
-        jScrollPane2.setViewportView(jTable2);
-        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tablesampah.setColumnSelectionAllowed(true);
+        tablesampah.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                tablesampahInputMethodTextChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablesampah);
+        tablesampah.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         btncetak.setText("Cetak");
         btncetak.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +245,10 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btncetakActionPerformed
 
+    private void tablesampahInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tablesampahInputMethodTextChanged
+        // TODO add your handling code here
+    }//GEN-LAST:event_tablesampahInputMethodTextChanged
+
     /**
      * @param args the command line arguments
      */
@@ -286,24 +297,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tablesampah;
     // End of variables declaration//GEN-END:variables
 
-public class getConnection {
-    public static Connection mysqlconfig;
 
-    public static Connection configDB() throws SQLException {
-        try {
-            String url = "jdbc:mysql://localhost:3306/userdb";
-            String username = "root";
-            String password = "";
-
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            mysqlconfig = DriverManager.getConnection(url, username, password);
-        } catch (Exception e) {
-            System.err.println("koneksi gagal" + e.getMessage());
-        }
-        return mysqlconfig;
-    }
-}
 }

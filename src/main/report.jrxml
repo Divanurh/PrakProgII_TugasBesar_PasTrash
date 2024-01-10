@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10595a1a-ca0c-4ffd-8af6-fceea7e50a20">
-	<property name="ireport.zoom" value="1.6105100000000014"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c801041-22da-45ed-a706-221ba5ddfad7">
+	<property name="ireport.zoom" value="1.3310000000000026"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
-		<![CDATA[select * from akun]]>
+		<![CDATA[select * from sampah]]>
 	</queryString>
-	<field name="username" class="java.lang.String">
+	<field name="Kategori_Sampah" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="name" class="java.lang.String">
+	<field name="Jenis_Sampah" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="no" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<variable name="Jenis_Sampah_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{Jenis_Sampah}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="209" y="28" width="137" height="20" uuid="a61eb1ed-3ff3-4b9f-96cd-b523e685acad"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+				<reportElement x="211" y="11" width="126" height="40" uuid="9dc286f9-74a3-4c06-b97b-be07cfcd733b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Report Data User]]></text>
+				<text><![CDATA[Data Sampah]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="34" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="62" splitType="Stretch">
 			<staticText>
-				<reportElement x="39" y="40" width="165" height="20" uuid="654118f9-23ea-4227-b5c2-9619724999b1"/>
+				<reportElement x="91" y="41" width="230" height="20" uuid="4e92a550-295b-401a-9b5d-f1c2fdd868dc"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -44,12 +44,12 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
-				<text><![CDATA[No Telepon]]></text>
+				<text><![CDATA[Kategori Sampah]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="204" y="40" width="151" height="20" uuid="790d2e76-a343-4b1f-874f-d06a8ea474da"/>
+				<reportElement x="321" y="41" width="150" height="20" uuid="1b57c683-846e-4a21-aa40-7d25de2fcce4"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -58,12 +58,12 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Nama]]></text>
+				<text><![CDATA[Jenis Sampah]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="355" y="40" width="185" height="20" uuid="49dd380b-c0e7-40fa-9ddc-25c2440ec5e8"/>
+				<reportElement x="68" y="41" width="23" height="20" uuid="10bc175b-e38d-4b39-a9e0-0e32781348eb"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -72,30 +72,16 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Username]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="19" y="40" width="20" height="20" uuid="e1475035-1128-44f6-a2b8-b21a6e3d157d"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
-				</textElement>
-				<text><![CDATA[No]]></text>
+				<text><![CDATA[NO]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="39" y="0" width="165" height="20" uuid="f9dcf72d-082c-4f82-8f59-1b5c45fb02ae"/>
+				<reportElement x="68" y="0" width="23" height="20" uuid="a9b333db-a13b-4f60-9f77-159c86f16724"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -104,40 +90,12 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="204" y="0" width="151" height="20" uuid="4763ce5d-73ec-4f45-aeee-94f17b87b776"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="19" y="0" width="20" height="20" uuid="cdd0d87b-9dea-4f02-8793-65d4a7377714"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="355" y="0" width="185" height="20" uuid="4b8bdf80-9387-46a5-b7f9-fbc444e87a84"/>
+				<reportElement x="91" y="0" width="230" height="20" uuid="103d8c27-e089-4f17-aa45-e8db5c6602dc"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -146,9 +104,23 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Kategori_Sampah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="0" width="150" height="20" uuid="ae2599e0-b4c0-4898-b3b1-dee33f14c94d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Jenis_Sampah}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -156,7 +128,13 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="221" y="17" width="100" height="20" uuid="a4b87df5-8de7-4544-bb6f-80abd9c08720"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>
